@@ -3,9 +3,9 @@ fn atoi_fn(s: String) -> i32 {
     let mut result = String::new();
 
     if x.len() != 0 && (x[0].is_ascii_digit() || x[0] == '-' || x[0] == '+') {
-        let mut is_negative = 1;
+        let mut make_negative = 1;
         if x[0] == '-' {
-            is_negative = -1;
+            make_negative = -1;
             x.remove(0);
         } else if x[0] == '+' {
             x.remove(0);
@@ -19,13 +19,13 @@ fn atoi_fn(s: String) -> i32 {
         result = result.trim_start_matches('0').parse().unwrap();
         if result.len() != 0 {
             if result.len() > 10 {
-                if is_negative == -1 {
+                if make_negative == -1 {
                     i32::MIN
                 } else {
                     i32::MAX
                 }
             } else {
-                let parsed = result.parse::<i64>().unwrap() * is_negative;
+                let parsed = result.parse::<i64>().unwrap() * make_negative;
                 std::cmp::max(i32::MIN as i64, std::cmp::min(parsed, i32::MAX as i64)) as i32
             }
         } else {
